@@ -132,8 +132,19 @@ function setupTabs() {
     const tabContents = document.querySelectorAll('.tab-content');
     const modelImages = document.querySelectorAll('.model-img');
 
-    function activateTab(tabId) {
-        // Remover classes ativas de todos os elementos
+    // Primeiro, esconder todos os conteúdos
+    tabContents.forEach(content => {
+        content.style.display = 'none';
+        content.classList.remove('active');
+    });
+    
+    modelImages.forEach(img => {
+        img.style.display = 'none';
+        img.classList.remove('active');
+    });
+
+    function switchTab(tabId) {
+        // Desativar todas as tabs
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => {
             content.style.display = 'none';
@@ -144,32 +155,36 @@ function setupTabs() {
             img.classList.remove('active');
         });
 
-        // Ativar elementos da tab selecionada
-        const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
-        const selectedContent = document.getElementById(tabId);
-        const selectedImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
+        // Ativar a tab selecionada
+        const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const activeContent = document.getElementById(tabId);
+        const activeImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
 
-        if (selectedButton) selectedButton.classList.add('active');
-        if (selectedContent) {
-            selectedContent.style.display = 'block';
-            selectedContent.classList.add('active');
+        if (activeButton) activeButton.classList.add('active');
+        if (activeContent) {
+            activeContent.style.display = 'block';
+            activeContent.classList.add('active');
         }
-        if (selectedImage) {
-            selectedImage.style.display = 'block';
-            selectedImage.classList.add('active');
+        if (activeImage) {
+            activeImage.style.display = 'block';
+            activeImage.classList.add('active');
         }
     }
 
-    // Definir tab inicial
-    activateTab('mk3');
-
-    // Adicionar event listeners aos botões
+    // Adicionar event listeners
     tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             const tabId = button.getAttribute('data-tab');
-            activateTab(tabId);
+            switchTab(tabId);
         });
     });
+
+    // Ativar a primeira tab por padrão
+    if (tabButtons.length > 0) {
+        const firstTabId = tabButtons[0].getAttribute('data-tab');
+        switchTab(firstTabId);
+    }
 }
 
 // Carregar feed do Instagram
@@ -314,9 +329,10 @@ function initHeroImage() {
 function initAboutImage() {
     const aboutImage = document.querySelector('.presenter-img');
     if (aboutImage) {
-        aboutImage.src = window.innerWidth <= 768 ? 
-            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
-            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+        aboutImage.src = '/src/public/retrato/sobre.jpeg';
+        aboutImage.onerror = () => {
+            aboutImage.src = '/public/retrato/sobre.jpeg';
+        };
     }
 }
 
