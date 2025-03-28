@@ -101,9 +101,9 @@ function initAnimations() {
                 y: 30,
                 duration: 0.8
             }, '-=0.3')
-            .from('.model-img.active', {
+            .from('.specs-image', {
                 opacity: 0,
-                scale: 0.9,
+                x: 50,
                 duration: 0.8
             }, '-=0.5');
         }
@@ -372,6 +372,28 @@ function initAboutImage() {
         };
     }
 }
+
+// RPM Meter Control
+function updateRPMMeter() {
+    const maxRPM = 8000;
+    const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    const currentRPM = Math.round((scrollPercentage / 100) * maxRPM);
+    const rpmValue = document.querySelector('.rpm-value');
+    if (rpmValue) {
+        rpmValue.textContent = currentRPM.toLocaleString();
+        // Mudança de cor baseada nas RPM
+        if (currentRPM > 7000) {
+            rpmValue.style.color = '#ff0000';
+        } else if (currentRPM > 5000) {
+            rpmValue.style.color = '#ff6b00';
+        } else {
+            rpmValue.style.color = '#ffffff';
+        }
+    }
+}
+
+window.addEventListener('scroll', updateRPMMeter);
+updateRPMMeter(); // Inicialização
 
 // Atualizar imagens quando a janela for redimensionada
 window.addEventListener('resize', () => {
