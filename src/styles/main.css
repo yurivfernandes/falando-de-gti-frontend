@@ -360,6 +360,53 @@ body {
     .about-text {
         text-align: left;
     }
+
+    .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .specs-info {
+        grid-row: 3;
+    }
+
+    .specs-image {
+        position: relative;
+        top: 0;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 16/9;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--secondary-color);
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .model-img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        margin: auto;
+    }
+
+    .tab-content {
+        margin-top: 2rem;
+    }
+
+    .tab-buttons {
+        gap: 0.5rem;
+    }
+
+    .tab-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.4rem;
+    }
 }
 
 /* Ajuste do conteúdo principal para não ficar sob o header */
@@ -371,12 +418,22 @@ main, section:first-of-type {
 .hero {
     min-height: 100vh;
     width: 100%;
+    background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.6)), url('https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg');
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-position: top center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-color: var(--dark-color);
     position: relative;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.6)), url('https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+    }
 }
 
 .hero-content {
@@ -797,10 +854,11 @@ section {
 
 .specs-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
+    align-items: start;
 }
 
 .tabs {
@@ -819,16 +877,11 @@ section {
 }
 
 .specs-image {
-    order: 1;
-    margin: 0 auto;
     width: 100%;
-    max-width: 500px;
-    height: auto;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    aspect-ratio: 16/9;
     position: sticky;
     top: 100px;
+    margin-left: 2rem;
 }
 
 .tab-buttons {
@@ -858,16 +911,15 @@ section {
 }
 
 .tab-content {
-    display: none;
+    min-height: 400px;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: none;
+    transition: opacity 0.3s ease;
 }
 
 .tab-content.active {
-    display: block;
     opacity: 1;
-    transform: translateY(0);
+    display: block;
 }
 
 .specs-card {
@@ -912,7 +964,7 @@ section {
 /* Layout da seção "Curiosidades" no modo desktop */
 .specs-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -942,7 +994,7 @@ section {
     .specs-grid {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
-        gap: 2rem;
+        gap: 3rem;
     }
 
     .tabs {
@@ -956,9 +1008,22 @@ section {
     }
 
     .specs-image {
+        position: relative;
+        top: 0;
+        margin-left: 0;
+        width: 100%;
+        aspect-ratio: 16/9;
         grid-row: 2;
         grid-column: 1;
         justify-self: center;
+        height: 300px;
+        order: -1;
+    }
+
+    .model-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 }
 
@@ -979,11 +1044,13 @@ section {
 }
 
 .model-img {
-    display: none;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
+    display: none;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
 }
 
 .model-img.active {

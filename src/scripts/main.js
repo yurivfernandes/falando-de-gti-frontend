@@ -117,34 +117,53 @@ function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     const modelImages = document.querySelectorAll('.model-img');
+    const specsInfo = document.querySelector('.specs-info');
 
-    // Função para ativar tab
     function activateTab(tabId) {
-        // Desativa todos os botões, conteúdos e imagens
+        // Mantém a altura atual do conteúdo para evitar "saltos"
+        const currentHeight = specsInfo.offsetHeight;
+        specsInfo.style.minHeight = `${currentHeight}px`;
+
+        // Desativa todas as tabs
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => {
-            content.classList.remove('active');
             content.style.display = 'none';
+            content.classList.remove('active');
         });
-        modelImages.forEach(img => img.classList.remove('active'));
+        modelImages.forEach(img => {
+            img.style.opacity = '0';
+            img.style.display = 'none';
+        });
 
-        // Ativa os elementos da tab selecionada
+        // Ativa a tab selecionada
         const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
         const selectedContent = document.getElementById(tabId);
         const selectedImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
 
         if (selectedButton) selectedButton.classList.add('active');
+        
+        // Faz a transição suave do conteúdo
         if (selectedContent) {
-            selectedContent.classList.add('active');
             selectedContent.style.display = 'block';
+            setTimeout(() => {
+                selectedContent.classList.add('active');
+                // Ajusta a altura mínima após a transição
+                specsInfo.style.minHeight = `${selectedContent.offsetHeight}px`;
+            }, 50);
         }
-        if (selectedImage) selectedImage.classList.add('active');
+
+        // Faz a transição suave da imagem
+        if (selectedImage) {
+            selectedImage.style.display = 'block';
+            setTimeout(() => {
+                selectedImage.style.opacity = '1';
+            }, 50);
+        }
     }
 
-    // Ativar MK3 por padrão
+    // Ativa MK3 por padrão
     activateTab('mk3');
 
-    // Setup dos cliques das tabs
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.getAttribute('data-tab');
