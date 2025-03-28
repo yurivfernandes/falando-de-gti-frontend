@@ -116,56 +116,39 @@ function setupMobileMenu() {
 function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
+    const modelImages = document.querySelectorAll('.model-img');
 
-    // Desativar todos
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Ativar MK3 por padrão
-    const mk3Button = document.querySelector('[data-tab="mk3"]');
-    const mk3Content = document.getElementById('mk3');
-    if (mk3Button && mk3Content) {
-        mk3Button.classList.add('active');
-        mk3Content.classList.add('active');
-        // Animar entrada
-        gsap.from('#mk3 .specs-card', {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: 'power2.out'
+    // Função para ativar tab
+    function activateTab(tabId) {
+        // Desativa todos os botões, conteúdos e imagens
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
         });
+        modelImages.forEach(img => img.classList.remove('active'));
+
+        // Ativa os elementos da tab selecionada
+        const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const selectedContent = document.getElementById(tabId);
+        const selectedImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
+
+        if (selectedButton) selectedButton.classList.add('active');
+        if (selectedContent) {
+            selectedContent.classList.add('active');
+            selectedContent.style.display = 'block';
+        }
+        if (selectedImage) selectedImage.classList.add('active');
     }
 
-    // Setup dos cliques das abas
+    // Ativar MK3 por padrão
+    activateTab('mk3');
+
+    // Setup dos cliques das tabs
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-                content.style.display = 'none';
-            });
-
-            button.classList.add('active');
             const tabId = button.getAttribute('data-tab');
-            const activeContent = document.getElementById(tabId);
-            activeContent.classList.add('active');
-            activeContent.style.display = 'block';
-
-            // Animar novo conteúdo
-            gsap.from(`#${tabId} .specs-card`, {
-                opacity: 0,
-                y: 20,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
-
-            gsap.from(`#${tabId} .specs-image`, {
-                opacity: 0,
-                x: 20,
-                duration: 0.5,
-                ease: 'power2.out',
-                delay: 0.2
-            });
+            activateTab(tabId);
         });
     });
 }
