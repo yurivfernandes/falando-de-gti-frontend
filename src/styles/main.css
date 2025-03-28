@@ -281,7 +281,9 @@ body {
         margin-top: 60px;
         min-height: 100vh;
         background-attachment: scroll;
-        background-position: top center;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
         justify-content: flex-end;
         align-items: flex-end;
         padding-bottom: 15vh;
@@ -294,25 +296,72 @@ body {
     }
 
     .about-image {
-        max-width: 100%;
         width: 100%;
+        max-width: 100%;
         height: auto;
         margin: 0 auto 2rem;
         order: -1;
+        border-radius: 10px;
+        overflow: hidden;
+        flex: 1;
+        position: relative;
     }
 
     .presenter-img {
         width: 100%;
         height: auto;
-        object-fit: cover;
         display: block;
-        max-width: 100%;
+        object-fit: cover;
+        max-height: none;
+        min-height: auto;
         border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        margin: 0 auto;
     }
 
     .about-content {
         flex-direction: column;
         gap: 2rem;
+    }
+
+    .about-text {
+        text-align: left;
+    }
+
+    /* Ajustes específicos para a foto na seção sobre no modo celular */
+    .about-section {
+        padding: 4rem 0;
+        margin-top: 0;
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .about-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto 2rem;
+        order: -1;
+        border-radius: 10px;
+        overflow: hidden;
+        flex: auto !important;
+        position: relative;
+        text-align: center;
+    }
+
+    .presenter-img {
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        margin: 0 auto;
+        object-fit: contain !important;
+        max-height: none !important;
+        aspect-ratio: 16/9;
     }
 
     .about-text {
@@ -333,11 +382,10 @@ main, section:first-of-type {
     background-attachment: fixed;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     text-align: center;
     position: relative;
-    padding-bottom: 5rem;
-    background: url('path/to/hero-image.jpg') no-repeat center center;
+    padding-bottom: 30vh;
 }
 
 .hero-content {
@@ -773,8 +821,13 @@ section {
 }
 
 .tabs {
-    max-width: 1000px;
+    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
+    text-align: center;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 2rem;
 }
 
 .tab-buttons {
@@ -783,6 +836,8 @@ section {
     gap: 1rem;
     margin-bottom: 3rem;
     flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
 }
 
 .tab-btn {
@@ -858,24 +913,27 @@ section {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .tabs {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
     grid-column: 1 / -1;
+    grid-row: 1;
     margin-bottom: 2rem;
 }
 
-.specs-info {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.specs-image {
-    grid-column: 2;
-    grid-row: 2;
+.tab-buttons {
     display: flex;
-    align-items: flex-start;
     justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 /* Layout da seção "Curiosidades" no modo mobile */
