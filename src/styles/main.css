@@ -301,13 +301,6 @@ body {
         text-align: center;
     }
 
-    .presenter-img {
-        aspect-ratio: 16/9;
-        object-fit: cover !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-
     .about-text {
         text-align: left;
     }
@@ -446,11 +439,6 @@ section {
     transition: all 0.6s ease;
 }
 
-.about-section.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .about-content {
     display: flex;
     justify-content: space-between;
@@ -486,6 +474,13 @@ section {
     transition: var(--transition);
 }
 
+@media (max-width: 768px) {
+    .presenter-img {
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+}
+
 .power-counter {
     display: inline-flex;
     align-items: center;
@@ -511,6 +506,19 @@ section {
     color: var(--light-color);
     margin-left: 8px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 992px) {
+    .power-counter {
+        padding: 1.2rem 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .power-counter {
+        padding: 1rem 2rem;
+        margin: 2rem auto;
+    }
 }
 
 /* Videos Section */
@@ -885,34 +893,6 @@ section {
     line-height: 1.6;
 }
 
-/* Layout da seção "Curiosidades" no modo desktop */
-.specs-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.tabs {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin-bottom: 2rem;
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.tab-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
 /* Layout da seção "Curiosidades" no modo mobile */
 @media (max-width: 768px) {
     .specs-grid {
@@ -948,6 +928,10 @@ section {
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+
+    .tab-buttons {
+        gap: 0.5rem;
     }
 }
 
@@ -1097,6 +1081,7 @@ section {
     
     .power-counter {
         padding: 1rem 2rem;
+        margin: 2rem auto;
     }
     
     .counter-value {
@@ -1105,9 +1090,5 @@ section {
     
     .counter-label {
         font-size: 1.8rem;
-    }
-    
-    .power-counter {
-        margin: 2rem auto;
     }
 }
