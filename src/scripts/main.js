@@ -28,36 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Inicializa as transições entre seções
 function initAnimations() {
-    // Hero animations
-    const heroTimeline = gsap.timeline();
-    heroTimeline
-        .from('.animated-title', {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: 'power3.out'
-        })
-        .from('.hero-content p', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            ease: 'power3.out'
-        }, '-=0.5');
+    // Hero animation
+    gsap.from('.hero-content', {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: 'power3.out'
+    });
 
-    // O botão agora permanecerá visível
-    const ctaBtn = document.querySelector('.cta-btn');
-    if (ctaBtn) {
-        ctaBtn.style.opacity = '1';
-        ctaBtn.style.visibility = 'visible';
-    }
-
-    // Scroll animations for sections
+    // Animação das seções
     const sections = gsap.utils.toArray('.section-fade');
-    sections.forEach(section => {
-        gsap.from(section, {
-            opacity: 0,
-            y: 50,
-            duration: 1,
+    sections.forEach((section, i) => {
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: section,
                 start: 'top 80%',
@@ -65,32 +47,87 @@ function initAnimations() {
                 toggleActions: 'play none none reverse'
             }
         });
-    });
 
-    // Videos animation
-    gsap.from('.video-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
-        scrollTrigger: {
-            trigger: '.videos-grid',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+        // Animar título da seção
+        const title = section.querySelector('.section-title');
+        if (title) {
+            tl.from(title, {
+                opacity: 0,
+                y: 30,
+                duration: 0.8
+            });
+        }
+
+        // Animar elementos específicos em cada seção
+        if (section.classList.contains('about-section')) {
+            tl.from(section.querySelector('.about-text'), {
+                opacity: 0,
+                x: -50,
+                duration: 0.8
+            })
+            .from(section.querySelector('.about-image'), {
+                opacity: 0,
+                x: 50,
+                duration: 0.8
+            }, '-=0.6');
+        }
+
+        if (section.classList.contains('videos-section')) {
+            tl.from(section.querySelectorAll('.video-card'), {
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                stagger: 0.2
+            });
+        }
+
+        if (section.classList.contains('gallery-section')) {
+            tl.from(section.querySelectorAll('.gallery-item'), {
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                stagger: 0.1
+            });
+        }
+
+        if (section.classList.contains('specs-section')) {
+            tl.from('.tab-buttons', {
+                opacity: 0,
+                y: 20,
+                duration: 0.6
+            })
+            .from('.specs-card', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8
+            }, '-=0.3')
+            .from('.model-img.active', {
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.8
+            }, '-=0.5');
+        }
+
+        if (section.classList.contains('docs-section')) {
+            tl.from('.docs-card', {
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.8
+            });
         }
     });
 
-    // Gallery animation
-    gsap.from('.gallery-item', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.1,
+    // Animação do header no scroll
+    gsap.to('.header', {
         scrollTrigger: {
-            trigger: '.gallery-grid',
-            start: 'top 80%',
+            trigger: 'body',
+            start: 'top -80',
+            end: '+=80',
             toggleActions: 'play none none reverse'
-        }
+        },
+        backgroundColor: 'rgba(18, 18, 18, 0.95)',
+        backdropFilter: 'blur(10px)',
+        duration: 0.3
     });
 }
 
