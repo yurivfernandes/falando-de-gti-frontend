@@ -10,6 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadVideoDetails();
     initHeroImage();
     initAboutImage();
+
+    // Inicializar imagem do apresentador
+    const presenterImage = document.getElementById('presenterImage');
+    if (presenterImage) {
+        presenterImage.src = window.innerWidth <= 768 ? 
+            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
+            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+
+        window.addEventListener('resize', () => {
+            presenterImage.src = window.innerWidth <= 768 ? 
+                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
+                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+        });
+    }
 });
 
 // Inicializa as transições entre seções
@@ -117,53 +131,39 @@ function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     const modelImages = document.querySelectorAll('.model-img');
-    const specsInfo = document.querySelector('.specs-info');
 
     function activateTab(tabId) {
-        // Mantém a altura atual do conteúdo para evitar "saltos"
-        const currentHeight = specsInfo.offsetHeight;
-        specsInfo.style.minHeight = `${currentHeight}px`;
-
-        // Desativa todas as tabs
+        // Remover classes ativas de todos os elementos
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => {
             content.style.display = 'none';
             content.classList.remove('active');
         });
         modelImages.forEach(img => {
-            img.style.opacity = '0';
             img.style.display = 'none';
+            img.classList.remove('active');
         });
 
-        // Ativa a tab selecionada
+        // Ativar elementos da tab selecionada
         const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
         const selectedContent = document.getElementById(tabId);
         const selectedImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
 
         if (selectedButton) selectedButton.classList.add('active');
-        
-        // Faz a transição suave do conteúdo
         if (selectedContent) {
             selectedContent.style.display = 'block';
-            setTimeout(() => {
-                selectedContent.classList.add('active');
-                // Ajusta a altura mínima após a transição
-                specsInfo.style.minHeight = `${selectedContent.offsetHeight}px`;
-            }, 50);
+            selectedContent.classList.add('active');
         }
-
-        // Faz a transição suave da imagem
         if (selectedImage) {
             selectedImage.style.display = 'block';
-            setTimeout(() => {
-                selectedImage.style.opacity = '1';
-            }, 50);
+            selectedImage.classList.add('active');
         }
     }
 
-    // Ativa MK3 por padrão
+    // Definir tab inicial
     activateTab('mk3');
 
+    // Adicionar event listeners aos botões
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.getAttribute('data-tab');
