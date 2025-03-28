@@ -70,15 +70,6 @@ falando-de-gti-frontend/
   - Transições suaves
   - Efeitos de hover
 
-## ⚙️ Configuração
-
-1. Crie um arquivo .env na raiz do projeto
-2. Configure as chaves de API:
-   \`\`\`env
-   YOUTUBE_API_KEY=sua_chave
-   INSTAGRAM_TOKEN=seu_token
-   \`\`\`
-
 ## 📱 Responsividade
 
 - 📱 Mobile: < 576px
