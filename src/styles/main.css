@@ -289,50 +289,6 @@ body {
     }
 
     .about-image {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 auto 2rem;
-        order: -1;
-        border-radius: 10px;
-        overflow: hidden;
-        flex: 1;
-        position: relative;
-    }
-
-    .presenter-img {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-        max-height: none;
-        min-height: auto;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        margin: 0 auto;
-    }
-
-    .about-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .about-text {
-        text-align: left;
-    }
-
-    /* Ajustes específicos para a foto na seção sobre no modo celular */
-    .about-section {
-        padding: 4rem 0;
-        margin-top: 0;
-    }
-
-    .about-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .about-image {
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
@@ -346,15 +302,10 @@ body {
     }
 
     .presenter-img {
+        aspect-ratio: 16/9;
+        object-fit: cover !important;
         width: 100% !important;
         height: auto !important;
-        display: block;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        margin: 0 auto;
-        object-fit: contain !important;
-        max-height: none !important;
-        aspect-ratio: 16/9;
     }
 
     .about-text {
@@ -482,6 +433,7 @@ section {
     display: block !important;
 }
 
+/* About Section */
 .about-section {
     min-height: 100vh;
     width: 100%;
@@ -503,37 +455,8 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--accent-color);
-}
-
-.speedometer::after {
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    bottom: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-}
-
-/* About Section */
-.about-section {
-    min-height: 100vh;
-    width: 100%;
-    background-color: var(--secondary-color);
-    display: flex;
-    align-items: center;
-    padding: 8rem 0;
-}
-
-.about-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 5rem;
+    color: var(--accent-color);
 }
 
 .about-text {
@@ -556,6 +479,7 @@ section {
 .presenter-img {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
