@@ -1,102 +1,126 @@
-# Falando de GTI - Landing Page
+# 🏎️ Falando de GTI - Landing Page
 
-Landing page moderna e responsiva para o canal "Falando de GTI", focado em carros esportivos da Volkswagen, especialmente o Golf GTI MK3.
+<div align="center">
+  <img src="https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/logo.png" alt="Falando de GTI Logo" width="300px">
 
-## Características Principais
+  [![YouTube Channel](https://img.shields.io/badge/YouTube-Falando%20de%20GTI-red)](https://www.youtube.com/falandodegti)
+  [![Instagram](https://img.shields.io/badge/Instagram-%40falandodegti-purple)](https://www.instagram.com/falandodegti)
+  [![Facebook](https://img.shields.io/badge/Facebook-Falando%20de%20GTI-blue)](https://www.facebook.com/falandodegti)
+</div>
 
-- Design moderno inspirado no universo automotivo com paleta de cores GTI
-- Totalmente responsivo para dispositivos móveis e desktop
-- Velocímetro interativo que reage ao scroll da página
-- Contador de cavalos de potência baseado no progresso da página
-- Integração com APIs do YouTube e Instagram
-- Animações suaves e transições elegantes usando GSAP
+## ⚠️ Aviso Legal
+Este projeto é propriedade intelectual do canal Falando de GTI e seu desenvolvedor. Não é permitida a cópia, distribuição ou uso do código para fins pessoais ou comerciais sem autorização expressa.
 
-## Estrutura do Projeto
+Para licenciamento ou parcerias, entre em contato: yuri.viana.fernandes@gmail.com
+
+## 🚀 Sobre o Projeto
+
+Landing page moderna e dinâmica desenvolvida para o canal "Falando de GTI", especializado em conteúdo sobre carros esportivos da Volkswagen, com foco especial no Golf GTI MK3.
+
+### ✨ Destaques
+
+- 🎨 Design automotivo moderno com paleta de cores GTI
+- 📱 Layout totalmente responsivo
+- 🏃‍♂️ Animações suaves e efeitos parallax
+- 🔧 Integração com APIs do YouTube e Instagram
+- 🏁 Velocímetro interativo que reage ao scroll
+- 🐎 Contador dinâmico de cavalos de potência
+
+## 🛠️ Tecnologias
+
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+
+- HTML5 & CSS3
+- JavaScript (ES6+)
+- GSAP (Animações)
+- Vite (Build tool)
+- APIs (YouTube & Instagram)
+
+## 📂 Estrutura do Projeto
 
 ```
 falando-de-gti-frontend/
-│
-├── index.html              # Estrutura principal da página
-├── styles/
-│   └── main.css            # Estilos CSS da página
-│
-├── scripts/
-│   ├── main.js             # JavaScript principal com funcionalidades
-│   └── config.js           # Configurações do site (vídeos, redes sociais, etc.)
-│
-├── public/                 # Pasta com imagens do site
-│   ├── golf-1.jpg
-│   ├── golf-2.jpg
-│   ├── ...
-│   └── apresentador-golf.jpg
-│
-└── README.md               # Documentação do projeto
+├── src/
+│   ├── index.html         # Página principal
+│   ├── styles/           # Estilos CSS
+│   ├── scripts/          # JavaScript
+│   └── public/           # Imagens e assets
+├── config/               # Configurações
+└── docs/                 # Documentação
 ```
 
-## Tecnologias Utilizadas
+## 🚗 Funcionalidades
 
-- HTML5, CSS3 e JavaScript
-- GSAP para animações e ScrollTrigger
-- APIs do YouTube e Instagram para integração de conteúdo
+- **Header Dinâmico** 🎯
+  - Menu responsivo
+  - Links para redes sociais
+  - Navegação suave
 
-## Instalação e Uso
+- **Seções Interativas** 🎮
+  - Hero com parallax
+  - Galeria de imagens
+  - Vídeos do YouTube
+  - Feed do Instagram
+  - Ficha técnica do GTI
+  - Velocímetro interativo
 
-1. Clone este repositório:
-   ```
-   git clone https://github.com/seu-usuario/falando-de-gti-frontend.git
-   ```
+- **Recursos Especiais** 🌟
+  - Contador de potência
+  - Animações GSAP
+  - Transições suaves
+  - Efeitos de hover
 
-2. Navegue até a pasta do projeto:
-   ```
-   cd falando-de-gti-frontend
-   ```
+## 🔧 Instalação
 
-3. Abra o arquivo `index.html` em seu navegador ou utilize um servidor local.
+\`\`\`bash
+# Clone o repositório
+git clone [url-do-repositorio]
 
-## Configuração
+# Entre na pasta
+cd falando-de-gti-frontend
 
-Para personalizar a landing page, edite o arquivo `scripts/config.js`:
+# Instale as dependências
+npm install
 
-- **Redes Sociais**: Altere os links para as redes sociais do canal
-- **Vídeos**: Substitua os IDs de vídeos do YouTube pelos IDs reais dos vídeos do canal
-- **Instagram**: Configure o token de acesso da API do Instagram para exibir o último post
-- **Animações**: Ajuste os valores máximos do velocímetro e do contador de potência
+# Inicie o servidor de desenvolvimento
+npm run dev
+\`\`\`
 
-### Configuração da API do Instagram
+## ⚙️ Configuração
 
-Para integrar sua conta do Instagram:
+1. Crie um arquivo .env na raiz do projeto
+2. Configure as chaves de API:
+   \`\`\`env
+   YOUTUBE_API_KEY=sua_chave
+   INSTAGRAM_TOKEN=seu_token
+   \`\`\`
 
-1. Crie uma conta de desenvolvedor do Facebook
-2. Configure um aplicativo no Facebook Developer Portal
-3. Gere um token de acesso para o Instagram
-4. Adicione o token gerado ao arquivo `config.js`
+## 📱 Responsividade
 
-## Responsividade
+- 📱 Mobile: < 576px
+- 📱 Tablet: < 768px
+- 💻 Desktop: < 992px
+- 🖥️ Large Desktop: > 992px
 
-O layout foi projetado para funcionar em todos os tamanhos de tela, desde dispositivos móveis até desktops grandes. Os breakpoints principais são:
+## 📞 Contato
 
-- Mobile: até 576px
-- Tablet: até 768px
-- Desktop: até 992px
-- Desktop grande: acima de 992px
+- 📧 Email: yuri.viana.fernandes@gmail.com
+- 🎥 YouTube: [@falandodegti](https://youtube.com/falandodegti)
+- 📸 Instagram: [@falandodegti](https://instagram.com/falandodegti)
+- 📘 Facebook: [Falando de GTI](https://facebook.com/falandodegti)
 
-## Recursos Adicionais
+## 📄 Licença
 
-- Velocímetro que reage ao scroll, atingindo velocidade máxima no final da página
-- Contador de "cavalos de potência" na seção Sobre
-- Efeitos de parallax e transições entre as seções
-- Menu responsivo para dispositivos móveis
+Todos os direitos reservados © 2024 Falando de GTI
 
-## Desenvolvimento
+Este projeto é proprietário e seu uso não está permitido sem autorização expressa do proprietário.
 
-Para contribuir com o projeto:
+---
 
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Faça commit das alterações (`git commit -m 'Adiciona nova feature'`)
-4. Faça push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+<div align="center">
+  <p>Desenvolvido com ❤️ por Yuri Fernandes para o Falando de GTI</p>
+</div>
