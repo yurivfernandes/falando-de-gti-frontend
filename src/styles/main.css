@@ -284,9 +284,11 @@ body {
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
+        background-color: var(--dark-color);
         justify-content: flex-end;
         align-items: flex-end;
         padding-bottom: 15vh;
+        filter: none;
     }
 
     /* Ajustes para a seção sobre */
@@ -377,9 +379,11 @@ main, section:first-of-type {
 .hero {
     min-height: 100vh;
     width: 100%;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-color: var(--dark-color);
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -410,20 +414,6 @@ section {
 }
 
 /* Hero Section */
-.hero {
-    min-height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    text-align: center;
-    position: relative;
-    padding-bottom: 30vh;
-}
-
 .hero-content {
     display: none;
 }
@@ -820,14 +810,35 @@ section {
     background-color: var(--dark-color);
 }
 
+.specs-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 .tabs {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 2rem;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin-bottom: 2rem;
+}
+
+.specs-info {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.specs-image {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .tab-buttons {
@@ -918,13 +929,13 @@ section {
 }
 
 .tabs {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 2rem;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin-bottom: 2rem;
 }
 
 .tab-buttons {

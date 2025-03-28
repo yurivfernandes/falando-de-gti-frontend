@@ -10,6 +10,53 @@ document.addEventListener('DOMContentLoaded', () => {
     loadVideoDetails();
     initHeroImage();
     initAboutImage();
+
+    // Objeto com as URLs das imagens para cada modelo
+    const modelImages = {
+        'mk1': 'https://uploads.vw-mms.de/system/production/images/vwn/014/070/images/8ea0c366b8233195910f041e148239d6f75ab7b5/DB2004AU01074_web_1600.jpg?1649149395',
+        'mk2': 'https://uploads.vw-mms.de/system/production/images/vwn/014/069/images/3ee94a09a3c4cdd31fc1f3aa25c3e8f7f6d4f15c/DB2004AU01064_web_1600.jpg?1649174518',
+        'mk3': 'https://uploads.vw-mms.de/system/production/images/vwn/014/068/images/fdbd7d8fc13062b4e51be9ca64937b55a10b6e24/DB2004AU01054_web_1600.jpg?1649174518',
+        'mk4': 'https://uploads.vw-mms.de/system/production/images/vwn/014/066/images/ed42114e4018f37e1d2b90e716b4b6c25c0c2a8a/DB2004AU01033_web_1600.jpg?1649149395',
+        'mk5': 'https://uploads.vw-mms.de/system/production/images/vwn/014/063/images/4b3b4be8af6b2aa860a80b5025c9df37af9cb35f/DB2004AU01013_web_1600.jpg?1649149394',
+        'mk6': 'https://uploads.vw-mms.de/system/production/images/vwn/014/061/images/5ab8d57ffb5afc80d773acec2af31b1a5e3e7e20/DB2004AU00993_web_1600.jpg?1649149394',
+        'mk7': 'https://mediaservice.vw-mediacenter.com/detail-view-2/detail/golf-gti-2013/mediaservice/detail/type/jpg/size/50/background/1f1f1f.jpg',
+        'mk8': 'https://mediaservice.vw-mediacenter.com/detail-view-2/detail/VWPR0695/mediaservice/detail/type/jpg/size/50/background/1f1f1f.jpg'
+    };
+
+    // Referência à imagem do modelo
+    const modelImg = document.querySelector('.model-img');
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                // Remover classe active de todos os botões e conteúdos
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Adicionar classe active ao botão clicado e conteúdo correspondente
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+
+                // Atualizar a imagem do modelo com base na tab selecionada
+                if (modelImg && modelImages[tabId]) {
+                    modelImg.src = modelImages[tabId];
+                    modelImg.alt = `Golf GTI ${tabId.toUpperCase()}`;
+                }
+            });
+        });
+
+        // Ativar a tab MK3 por padrão (já definida como ativa no HTML)
+        const activeMk = 'mk3';
+        if (modelImg && modelImages[activeMk]) {
+            modelImg.src = modelImages[activeMk];
+            modelImg.alt = `Golf GTI ${activeMk.toUpperCase()}`;
+        }
+    }
 });
 
 // Inicializa as transições entre seções

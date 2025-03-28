@@ -59,7 +59,6 @@ const CONFIG = {
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide4.jpg",
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide5.jpg",
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide7.jpeg",
-            "public/galeria/https://github.com/yurivfernandes/falando-de-gti-frontend/blob/main/src/public/galeria/slide7.jpeg.jpg",
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide8.jpg",
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide9.jpg",
             "https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide10.jpeg"
