@@ -279,16 +279,9 @@ body {
 
     .hero {
         margin-top: 60px;
-        min-height: 100vh;
         background-attachment: scroll;
-        background-position: center;
         background-size: contain;
-        background-repeat: no-repeat;
-        background-color: var(--dark-color);
-        justify-content: flex-end;
-        align-items: flex-end;
         padding-bottom: 15vh;
-        filter: none;
     }
 
     /* Ajustes para a seção sobre */
@@ -376,12 +369,13 @@ main, section:first-of-type {
     margin-top: 80px;
 }
 
+/* Hero Section */
 .hero {
     min-height: 100vh;
     width: 100%;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-color: var(--dark-color);
     display: flex;
@@ -392,32 +386,7 @@ main, section:first-of-type {
     padding-bottom: 30vh;
 }
 
-.hero-content {
-    display: none;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-section {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: block !important;
-}
-
-/* Hero Section */
-.hero-content {
-    display: none;
-}
-
+/* Animações */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -438,6 +407,12 @@ section {
 .section-fade.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+section {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
 }
 
 .about-section {
@@ -834,11 +809,16 @@ section {
 }
 
 .specs-image {
-    grid-column: 2;
-    grid-row: 2;
+    order: 1;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    position: sticky;
+    top: 100px;
 }
 
 .tab-buttons {
@@ -988,25 +968,16 @@ section {
     width: 20px;
 }
 
-.specs-image {
-    order: 1;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.specs-info {
-    order: 2;
-}
-
 .model-img {
+    display: none;
     width: 100%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.model-img.active {
+    display: block;
 }
 
 /* Docs Section */
