@@ -303,18 +303,15 @@ body {
     .about-image {
         order: -1;
         width: 100%;
-        max-width: none;
-        margin-bottom: 2rem;
-        aspect-ratio: 16/9;
-        max-width: 100%;
+        max-width: 80%;
         margin: 2rem auto;
     }
 
     .presenter-img {
         width: 100%;
-        height: 100%;
+        height: auto;
+        min-height: 300px;
         object-fit: cover;
-        display: block;
     }
 
     .about-content {
@@ -385,13 +382,20 @@ main, section:first-of-type {
     background-attachment: fixed;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
     text-align: center;
     position: relative;
-    padding-bottom: 30vh;
+    padding-bottom: 5rem;
+    background: url('path/to/hero-image.jpg') no-repeat center center;
 }
 
 .hero-content {
+    margin-top: auto;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
     max-width: 700px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -436,6 +440,12 @@ section {
 }
 
 .hero-content {
+    margin-top: auto;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
     max-width: 700px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -921,9 +931,9 @@ section {
 }
 
 .specs-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -944,11 +954,17 @@ section {
 }
 
 .specs-image {
+    order: 1;
+    margin: 0 auto;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.specs-info {
+    order: 2;
 }
 
 .model-img {
