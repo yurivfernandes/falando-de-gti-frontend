@@ -383,7 +383,7 @@ main, section:first-of-type {
     width: 100%;
     background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.6)), url('https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg');
     background-size: cover;
-    background-position: top center;
+    background-position: center 30%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: var(--dark-color);
@@ -392,10 +392,20 @@ main, section:first-of-type {
 
 @media (max-width: 768px) {
     .hero {
+        min-height: 80vh;
         background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.6)), url('https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg');
         background-size: cover;
-        background-position: center;
+        background-position: center 70%;
         background-attachment: scroll;
+    }
+
+    .hero-content {
+        bottom: 15vh;
+    }
+
+    .hero-content p {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
     }
 }
 
