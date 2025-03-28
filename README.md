@@ -70,22 +70,6 @@ falando-de-gti-frontend/
   - Transições suaves
   - Efeitos de hover
 
-## 🔧 Instalação
-
-\`\`\`bash
-# Clone o repositório
-git clone [url-do-repositorio]
-
-# Entre na pasta
-cd falando-de-gti-frontend
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-\`\`\`
-
 ## ⚙️ Configuração
 
 1. Crie um arquivo .env na raiz do projeto
