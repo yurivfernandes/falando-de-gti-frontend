@@ -1,11 +1,11 @@
 # Dependências
-node_modules/
-/.pnp
+node_modules
+.pnp
 .pnp.js
-/node_modules
+
 # Arquivos de build
-/build
-/dist
+build
+dist
 
 # Arquivos de ambiente
 .env
@@ -21,14 +21,14 @@ yarn-error.log*
 
 # Arquivos do sistema
 .DS_Store
-.vscode/
-.idea/
+.vscode
+.idea
 *.swp
 *.swo
 
 # Cache
-.cache/
-.npm/
+.cache
+.npm
 
 # Coverage
-/coverage
+coverage
