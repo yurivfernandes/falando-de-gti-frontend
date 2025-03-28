@@ -28,17 +28,13 @@ Landing page moderna e dinâmica desenvolvida para o canal "Falando de GTI", esp
 
 ## 🛠️ Tecnologias
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-
-- HTML5 & CSS3
-- JavaScript (ES6+)
-- GSAP (Animações)
-- Vite (Build tool)
-- APIs (YouTube & Instagram)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02.svg?style=for-the-badge&logo=GreenSock&logoColor=white)
+![Font Awesome](https://img.shields.io/badge/Font_Awesome-528DD7.svg?style=for-the-badge&logo=fontawesome&logoColor=white)
 
 ## 📂 Estrutura do Projeto
 
