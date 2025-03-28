@@ -113,6 +113,18 @@ body {
     color: var(--primary-color);
 }
 
+.highlight-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.highlight-link:hover {
+    color: #ff3333;
+    text-decoration: underline;
+}
+
 /* Header */
 .header {
     position: fixed;
