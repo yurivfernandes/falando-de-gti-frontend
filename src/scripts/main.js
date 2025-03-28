@@ -230,7 +230,7 @@ function setupGalleryModal() {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal();
-        }
+        } 
     });
 
     function closeModal() {
