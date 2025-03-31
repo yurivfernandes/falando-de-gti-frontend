@@ -1,0 +1,10 @@
+[build]
+command = "npm install && npm run build"
+output_dir = "dist"
+
+[site]
+bucket = "dist"
+entry-point = "dist/index.html"
+
+[env.production]
+name = "falando-de-gti-frontend-production"
