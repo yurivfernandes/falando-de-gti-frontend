@@ -4,43 +4,25 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     setupMobileMenu();
-    setupTabs(); // Garantir que as abas são inicializadas corretamente
-    setupPlaceholderInstagramFeed();
+    setupTabs();
+    loadInstagramFeed();
     setupGalleryModal();
+    loadVideoDetails();
     initHeroImage();
     initAboutImage();
 
-    // Carrega os detalhes dos vídeos se estiverem disponíveis
-    loadVideoDetails();
-
-    // Inicializar imagem do apresentador com fallback
+    // Inicializar imagem do apresentador
     const presenterImage = document.getElementById('presenterImage');
     if (presenterImage) {
-        const mobileImage = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg';
-        const desktopImage = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
-        
-        // Função para definir a imagem baseado no tamanho da tela
-        function setImageSource() {
-            presenterImage.src = window.innerWidth <= 768 ? mobileImage : desktopImage;
-            
-            // Adicionar manipulador de erro para tentar novo caminho se a imagem falhar
-            presenterImage.onerror = function() {
-                // Se falhar com protocolo https, tenta com http
-                if (this.src.startsWith('https://')) {
-                    this.src = this.src.replace('https://', 'http://');
-                } else {
-                    // Imagem de fallback local
-                    this.src = './public/retrato/sobre.jpeg';
-                    this.onerror = null; // Impede loop infinito
-                }
-            };
-        }
-        
-        // Definir a imagem inicial
-        setImageSource();
-        
-        // Recalcular quando a janela for redimensionada
-        window.addEventListener('resize', setImageSource);
+        presenterImage.src = window.innerWidth <= 768 ? 
+            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
+            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+
+        window.addEventListener('resize', () => {
+            presenterImage.src = window.innerWidth <= 768 ? 
+                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
+                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+        });
     }
 });
 
@@ -181,46 +163,23 @@ function setupMobileMenu() {
     });
 }
 
-// Setup das abas de curiosidades - CORRIGIDA para funcionar no Cloudflare
+// Setup das abas de curiosidades
 function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     const modelImages = document.querySelectorAll('.model-img');
-    
-    // Primeiro, esconder todos os conteúdos exceto o primeiro
-    tabContents.forEach((content, index) => {
-        if (index === 0) {
-            content.style.display = 'block';
-            content.classList.add('active');
-        } else {
-            content.style.display = 'none';
-            content.classList.remove('active');
-        }
-    });
-    
-    modelImages.forEach((img, index) => {
-        if (index === 0) {
-            img.style.display = 'block';
-            img.classList.add('active');
-        } else {
-            img.style.display = 'none';
-            img.classList.remove('active');
-        }
-    });
-    
-    // Adicionar classes ativas para o primeiro botão se nenhum estiver ativo
-    let hasActiveButton = false;
-    tabButtons.forEach(btn => {
-        if (btn.classList.contains('active')) {
-            hasActiveButton = true;
-        }
-    });
-    
-    if (!hasActiveButton && tabButtons.length > 0) {
-        tabButtons[0].classList.add('active');
-    }
 
-    // Função para trocar de aba
+    // Primeiro, esconder todos os conteúdos
+    tabContents.forEach(content => {
+        content.style.display = 'none';
+        content.classList.remove('active');
+    });
+    
+    modelImages.forEach(img => {
+        img.style.display = 'none';
+        img.classList.remove('active');
+    });
+
     function switchTab(tabId) {
         // Desativar todas as tabs
         tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -234,24 +193,15 @@ function setupTabs() {
         });
 
         // Ativar a tab selecionada
-        const activeButton = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+        const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
         const activeContent = document.getElementById(tabId);
         const activeImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
 
-        if (activeButton) {
-            activeButton.classList.add('active');
-        }
-        
+        if (activeButton) activeButton.classList.add('active');
         if (activeContent) {
             activeContent.style.display = 'block';
             activeContent.classList.add('active');
-            
-            // Garantir que a opacidade seja 1 para visibilidade
-            setTimeout(() => {
-                activeContent.style.opacity = '1';
-            }, 10);
         }
-        
         if (activeImage) {
             activeImage.style.display = 'block';
             activeImage.classList.add('active');
@@ -267,33 +217,39 @@ function setupTabs() {
         });
     });
 
-    // Ativar a primeira tab por padrão ou a tab correspondente à URL hash
-    const hash = window.location.hash.substring(1);
-    const hashTab = document.getElementById(hash);
-    
-    if (hashTab && hashTab.classList.contains('tab-content')) {
-        switchTab(hash);
-    } else if (tabButtons.length > 0) {
+    // Ativar a primeira tab por padrão
+    if (tabButtons.length > 0) {
         const firstTabId = tabButtons[0].getAttribute('data-tab');
         switchTab(firstTabId);
     }
 }
 
-// Placeholder para feed do Instagram
-function setupPlaceholderInstagramFeed() {
+// Carregar feed do Instagram
+async function loadInstagramFeed() {
     const instagramFeed = document.getElementById('instagramFeed');
     
-    if (instagramFeed) {
-        instagramFeed.innerHTML = `
-            <div class="instagram-post">
-                <a href="https://www.instagram.com/falandodegti" target="_blank">
-                    <img src="https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide6.jpg" alt="Siga no Instagram" loading="lazy">
-                    <div class="instagram-overlay">
-                        <p>Siga @falandodegti no Instagram para conteúdo exclusivo!</p>
-                    </div>
-                </a>
-            </div>
-        `;
+    try {
+        const response = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${instagramConfig.accessToken}`);
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+            const latestPost = data.data[0];
+            const mediaUrl = latestPost.media_type === 'VIDEO' ? latestPost.thumbnail_url : latestPost.media_url;
+            
+            instagramFeed.innerHTML = `
+                <div class="instagram-post">
+                    <a href="${latestPost.permalink}" target="_blank">
+                        <img src="${mediaUrl}" alt="Última postagem do Instagram" loading="lazy">
+                        <div class="instagram-overlay">
+                            <p>${latestPost.caption || ''}</p>
+                        </div>
+                    </a>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar feed do Instagram:', error);
+        instagramFeed.innerHTML = '<p>Erro ao carregar a última postagem.</p>';
     }
 }
 
@@ -354,25 +310,37 @@ function getVideoId(url) {
 async function loadVideoDetails() {
     const videoCards = document.querySelectorAll('.video-card');
     
-    videoCards.forEach(card => {
-        // Como não temos uma API_KEY configurada, vamos usar apenas o que já está no HTML
+    videoCards.forEach(async (card) => {
         const iframe = card.querySelector('iframe');
         if (iframe) {
             const videoId = getVideoId(iframe.src);
             if (videoId) {
-                // Verificamos se já existem elementos de título e descrição
-                const hasTitle = card.querySelector('h4');
-                const hasDesc = card.querySelector('p');
-                
-                // Se não existirem, adicionamos placeholder
-                if (!hasTitle && !hasDesc) {
-                    const titleElement = document.createElement('h4');
-                    titleElement.textContent = "Vídeo Golf GTI";
-                    card.appendChild(titleElement);
+                try {
+                    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${config.YOUTUBE_API_KEY}`);
+                    const data = await response.json();
                     
-                    const descElement = document.createElement('p');
-                    descElement.textContent = "Conheça mais sobre o Golf GTI neste vídeo do canal Falando de GTI.";
-                    card.appendChild(descElement);
+                    if (data.items && data.items[0]) {
+                        const videoTitle = data.items[0].snippet.title;
+                        const description = data.items[0].snippet.description;
+                        
+                        // Criar ou atualizar título
+                        let titleElement = card.querySelector('h4');
+                        if (!titleElement) {
+                            titleElement = document.createElement('h4');
+                            card.appendChild(titleElement);
+                        }
+                        titleElement.textContent = videoTitle;
+                        
+                        // Adicionar descrição curta
+                        let descElement = card.querySelector('p');
+                        if (!descElement) {
+                            descElement = document.createElement('p');
+                            card.appendChild(descElement);
+                        }
+                        descElement.textContent = description.split('\n')[0].substring(0, 100) + '...';
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar detalhes do vídeo:', error);
                 }
             }
         }
@@ -397,10 +365,10 @@ function initHeroImage() {
 // Função para carregar imagem do apresentador
 function initAboutImage() {
     const aboutImage = document.querySelector('.presenter-img');
-    if (aboutImage && !aboutImage.getAttribute('src')) {
-        aboutImage.src = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+    if (aboutImage) {
+        aboutImage.src = '/src/public/retrato/sobre.jpeg';
         aboutImage.onerror = () => {
-            aboutImage.src = './public/retrato/sobre.jpeg';
+            aboutImage.src = '/public/retrato/sobre.jpeg';
         };
     }
 }
@@ -430,9 +398,5 @@ updateRPMMeter(); // Inicialização
 // Atualizar imagens quando a janela for redimensionada
 window.addEventListener('resize', () => {
     initHeroImage();
-});
-
-// Garantir que as abas funcionem mesmo após o carregamento completo da página
-window.addEventListener('load', () => {
-    setupTabs();
+    initAboutImage();
 });
