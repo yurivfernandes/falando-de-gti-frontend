@@ -4,24 +4,43 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     setupMobileMenu();
-    setupTabs();
-    setupPlaceholderInstagramFeed(); // Substituído por placeholder estático
+    setupTabs(); // Garantir que as abas são inicializadas corretamente
+    setupPlaceholderInstagramFeed();
     setupGalleryModal();
     initHeroImage();
     initAboutImage();
 
-    // Inicializar imagem do apresentador
+    // Carrega os detalhes dos vídeos se estiverem disponíveis
+    loadVideoDetails();
+
+    // Inicializar imagem do apresentador com fallback
     const presenterImage = document.getElementById('presenterImage');
     if (presenterImage) {
-        presenterImage.src = window.innerWidth <= 768 ? 
-            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
-            'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
-
-        window.addEventListener('resize', () => {
-            presenterImage.src = window.innerWidth <= 768 ? 
-                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg' : 
-                'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
-        });
+        const mobileImage = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/hero.jpg';
+        const desktopImage = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
+        
+        // Função para definir a imagem baseado no tamanho da tela
+        function setImageSource() {
+            presenterImage.src = window.innerWidth <= 768 ? mobileImage : desktopImage;
+            
+            // Adicionar manipulador de erro para tentar novo caminho se a imagem falhar
+            presenterImage.onerror = function() {
+                // Se falhar com protocolo https, tenta com http
+                if (this.src.startsWith('https://')) {
+                    this.src = this.src.replace('https://', 'http://');
+                } else {
+                    // Imagem de fallback local
+                    this.src = './public/retrato/sobre.jpeg';
+                    this.onerror = null; // Impede loop infinito
+                }
+            };
+        }
+        
+        // Definir a imagem inicial
+        setImageSource();
+        
+        // Recalcular quando a janela for redimensionada
+        window.addEventListener('resize', setImageSource);
     }
 });
 
@@ -162,23 +181,46 @@ function setupMobileMenu() {
     });
 }
 
-// Setup das abas de curiosidades
+// Setup das abas de curiosidades - CORRIGIDA para funcionar no Cloudflare
 function setupTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     const modelImages = document.querySelectorAll('.model-img');
-
-    // Primeiro, esconder todos os conteúdos
-    tabContents.forEach(content => {
-        content.style.display = 'none';
-        content.classList.remove('active');
+    
+    // Primeiro, esconder todos os conteúdos exceto o primeiro
+    tabContents.forEach((content, index) => {
+        if (index === 0) {
+            content.style.display = 'block';
+            content.classList.add('active');
+        } else {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        }
     });
     
-    modelImages.forEach(img => {
-        img.style.display = 'none';
-        img.classList.remove('active');
+    modelImages.forEach((img, index) => {
+        if (index === 0) {
+            img.style.display = 'block';
+            img.classList.add('active');
+        } else {
+            img.style.display = 'none';
+            img.classList.remove('active');
+        }
     });
+    
+    // Adicionar classes ativas para o primeiro botão se nenhum estiver ativo
+    let hasActiveButton = false;
+    tabButtons.forEach(btn => {
+        if (btn.classList.contains('active')) {
+            hasActiveButton = true;
+        }
+    });
+    
+    if (!hasActiveButton && tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+    }
 
+    // Função para trocar de aba
     function switchTab(tabId) {
         // Desativar todas as tabs
         tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -192,15 +234,24 @@ function setupTabs() {
         });
 
         // Ativar a tab selecionada
-        const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const activeButton = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
         const activeContent = document.getElementById(tabId);
         const activeImage = document.querySelector(`.model-img[data-tab="${tabId}"]`);
 
-        if (activeButton) activeButton.classList.add('active');
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+        
         if (activeContent) {
             activeContent.style.display = 'block';
             activeContent.classList.add('active');
+            
+            // Garantir que a opacidade seja 1 para visibilidade
+            setTimeout(() => {
+                activeContent.style.opacity = '1';
+            }, 10);
         }
+        
         if (activeImage) {
             activeImage.style.display = 'block';
             activeImage.classList.add('active');
@@ -216,14 +267,19 @@ function setupTabs() {
         });
     });
 
-    // Ativar a primeira tab por padrão
-    if (tabButtons.length > 0) {
+    // Ativar a primeira tab por padrão ou a tab correspondente à URL hash
+    const hash = window.location.hash.substring(1);
+    const hashTab = document.getElementById(hash);
+    
+    if (hashTab && hashTab.classList.contains('tab-content')) {
+        switchTab(hash);
+    } else if (tabButtons.length > 0) {
         const firstTabId = tabButtons[0].getAttribute('data-tab');
         switchTab(firstTabId);
     }
 }
 
-// Placeholder para feed do Instagram até configurar API corretamente
+// Placeholder para feed do Instagram
 function setupPlaceholderInstagramFeed() {
     const instagramFeed = document.getElementById('instagramFeed');
     
@@ -341,10 +397,10 @@ function initHeroImage() {
 // Função para carregar imagem do apresentador
 function initAboutImage() {
     const aboutImage = document.querySelector('.presenter-img');
-    if (aboutImage) {
-        aboutImage.src = '/src/public/retrato/sobre.jpeg';
+    if (aboutImage && !aboutImage.getAttribute('src')) {
+        aboutImage.src = 'https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg';
         aboutImage.onerror = () => {
-            aboutImage.src = '/public/retrato/sobre.jpeg';
+            aboutImage.src = './public/retrato/sobre.jpeg';
         };
     }
 }
@@ -374,5 +430,9 @@ updateRPMMeter(); // Inicialização
 // Atualizar imagens quando a janela for redimensionada
 window.addEventListener('resize', () => {
     initHeroImage();
-    initAboutImage();
+});
+
+// Garantir que as abas funcionem mesmo após o carregamento completo da página
+window.addEventListener('load', () => {
+    setupTabs();
 });

@@ -35,9 +35,17 @@
 
     <title>Falando de GTI - Paixão por Carros Esportivos</title>
     <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Carregando GSAP para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+        integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="carbon-fiber">
@@ -103,7 +111,9 @@
                         instagram/FalandoDeGTI para estar sempre ligado em tudo o que se passa no canal.</p>
                 </div>
                 <div class="about-image">
-                    <img id="presenterImage" alt="Apresentador com Golf GTI MK3" class="presenter-img">
+                    <img id="presenterImage"
+                        src="https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/retrato/sobre.jpeg"
+                        alt="Apresentador com Golf GTI MK3" class="presenter-img" loading="lazy">
                 </div>
             </div>
         </div>
@@ -538,7 +548,8 @@
         </div>
     </footer>
 
-    <script src="./scripts/main.js"></script>
+    <!-- Carregando script principal no final para melhor performance -->
+    <script src="./scripts/main.js" defer></script>
 </body>
 
 </html>
