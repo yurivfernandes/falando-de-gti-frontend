@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     setupMobileMenu();
     setupTabs();
-    loadInstagramFeed();
+    setupPlaceholderInstagramFeed(); // Substituído por placeholder estático
     setupGalleryModal();
-    loadVideoDetails();
     initHeroImage();
     initAboutImage();
 
@@ -224,32 +223,21 @@ function setupTabs() {
     }
 }
 
-// Carregar feed do Instagram
-async function loadInstagramFeed() {
+// Placeholder para feed do Instagram até configurar API corretamente
+function setupPlaceholderInstagramFeed() {
     const instagramFeed = document.getElementById('instagramFeed');
     
-    try {
-        const response = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${instagramConfig.accessToken}`);
-        const data = await response.json();
-        
-        if (data.data && data.data.length > 0) {
-            const latestPost = data.data[0];
-            const mediaUrl = latestPost.media_type === 'VIDEO' ? latestPost.thumbnail_url : latestPost.media_url;
-            
-            instagramFeed.innerHTML = `
-                <div class="instagram-post">
-                    <a href="${latestPost.permalink}" target="_blank">
-                        <img src="${mediaUrl}" alt="Última postagem do Instagram" loading="lazy">
-                        <div class="instagram-overlay">
-                            <p>${latestPost.caption || ''}</p>
-                        </div>
-                    </a>
-                </div>
-            `;
-        }
-    } catch (error) {
-        console.error('Erro ao carregar feed do Instagram:', error);
-        instagramFeed.innerHTML = '<p>Erro ao carregar a última postagem.</p>';
+    if (instagramFeed) {
+        instagramFeed.innerHTML = `
+            <div class="instagram-post">
+                <a href="https://www.instagram.com/falandodegti" target="_blank">
+                    <img src="https://raw.githubusercontent.com/yurivfernandes/falando-de-gti-frontend/refs/heads/main/src/public/galeria/slide6.jpg" alt="Siga no Instagram" loading="lazy">
+                    <div class="instagram-overlay">
+                        <p>Siga @falandodegti no Instagram para conteúdo exclusivo!</p>
+                    </div>
+                </a>
+            </div>
+        `;
     }
 }
 
@@ -310,37 +298,25 @@ function getVideoId(url) {
 async function loadVideoDetails() {
     const videoCards = document.querySelectorAll('.video-card');
     
-    videoCards.forEach(async (card) => {
+    videoCards.forEach(card => {
+        // Como não temos uma API_KEY configurada, vamos usar apenas o que já está no HTML
         const iframe = card.querySelector('iframe');
         if (iframe) {
             const videoId = getVideoId(iframe.src);
             if (videoId) {
-                try {
-                    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${config.YOUTUBE_API_KEY}`);
-                    const data = await response.json();
+                // Verificamos se já existem elementos de título e descrição
+                const hasTitle = card.querySelector('h4');
+                const hasDesc = card.querySelector('p');
+                
+                // Se não existirem, adicionamos placeholder
+                if (!hasTitle && !hasDesc) {
+                    const titleElement = document.createElement('h4');
+                    titleElement.textContent = "Vídeo Golf GTI";
+                    card.appendChild(titleElement);
                     
-                    if (data.items && data.items[0]) {
-                        const videoTitle = data.items[0].snippet.title;
-                        const description = data.items[0].snippet.description;
-                        
-                        // Criar ou atualizar título
-                        let titleElement = card.querySelector('h4');
-                        if (!titleElement) {
-                            titleElement = document.createElement('h4');
-                            card.appendChild(titleElement);
-                        }
-                        titleElement.textContent = videoTitle;
-                        
-                        // Adicionar descrição curta
-                        let descElement = card.querySelector('p');
-                        if (!descElement) {
-                            descElement = document.createElement('p');
-                            card.appendChild(descElement);
-                        }
-                        descElement.textContent = description.split('\n')[0].substring(0, 100) + '...';
-                    }
-                } catch (error) {
-                    console.error('Erro ao carregar detalhes do vídeo:', error);
+                    const descElement = document.createElement('p');
+                    descElement.textContent = "Conheça mais sobre o Golf GTI neste vídeo do canal Falando de GTI.";
+                    card.appendChild(descElement);
                 }
             }
         }
