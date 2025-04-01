@@ -283,7 +283,7 @@ body {
     .menu-toggle {
         display: block;
         position: relative;
-        order: 0;
+        order: 2; /* Alterado para colocar o menu à direita */
         align-self: center;
         margin-right: 0;
     }
@@ -291,26 +291,37 @@ body {
     .nav-menu {
         display: none;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end; /* Alinhado à direita */
         position: absolute;
         top: 60px;
         right: 0;
         background-color: var(--dark-color);
         width: 100%;
         z-index: 1000;
+        padding-right: 20px; /* Padding à direita */
     }
 
     .nav-menu.active {
         display: flex;
     }
-
-    .social-links {
-        display: none;
+    
+    .nav-menu ul {
+        align-items: flex-end; /* Alinhado à direita */
+        text-align: right; /* Texto alinhado à direita */
     }
 
-    .hero {
-        background-attachment: scroll;
-        padding-bottom: 5vh;
+    .social-links {
+        display: flex;
+        order: 1; /* Alterado para ficar no meio */
+        justify-content: center;
+        position: static; /* Removido o posicionamento absoluto */
+        width: auto;
+        height: 100%;
+    }
+    
+    .social-links a {
+        margin: 0 10px;
+        font-size: 1.8rem;
     }
 
     /* Ajustes para a seção sobre */
