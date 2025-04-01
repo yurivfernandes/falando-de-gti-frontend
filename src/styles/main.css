@@ -255,7 +255,6 @@ body {
         z-index: 1000;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         flex-direction: row;
     }
 
@@ -266,13 +265,21 @@ body {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        height: 100%;
+        position: relative;
+        max-width: 100%;
+        padding: 0 15px;
     }
 
     .logo {
         flex: 0 0 auto;
+        width: 80px;
         text-align: left;
-        order: 0;
         margin-bottom: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 10px; /* Move a logo 10px para baixo */
     }
 
     .logo img {
@@ -282,23 +289,44 @@ body {
 
     .menu-toggle {
         display: block;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: 25px;
+        height: 25px;
         position: relative;
-        order: 2; /* Alterado para colocar o menu à direita */
-        align-self: center;
-        margin-right: 0;
+        z-index: 10;
+        right: 0; /* Garante que o botão fique na extremidade direita do seu espaço */
+    }
+
+    .social-links {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .social-links a {
+        margin: 0 10px;
+        font-size: 1.8rem;
+        color: var(--light-color);
     }
 
     .nav-menu {
         display: none;
         flex-direction: column;
-        align-items: flex-end; /* Alinhado à direita */
+        align-items: flex-end;
         position: absolute;
         top: 60px;
         right: 0;
         background-color: var(--dark-color);
         width: 100%;
         z-index: 1000;
-        padding-right: 20px; /* Padding à direita */
+        padding: 20px;
     }
 
     .nav-menu.active {
@@ -306,22 +334,15 @@ body {
     }
     
     .nav-menu ul {
-        align-items: flex-end; /* Alinhado à direita */
-        text-align: right; /* Texto alinhado à direita */
-    }
-
-    .social-links {
-        display: flex;
-        order: 1; /* Alterado para ficar no meio */
-        justify-content: center;
-        position: static; /* Removido o posicionamento absoluto */
-        width: auto;
-        height: 100%;
+        align-items: flex-end;
+        text-align: right;
+        width: 100%;
     }
     
-    .social-links a {
-        margin: 0 10px;
-        font-size: 1.8rem;
+    .nav-menu ul li {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: right;
     }
 
     /* Ajustes para a seção sobre */
