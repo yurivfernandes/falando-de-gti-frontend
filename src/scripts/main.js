@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     setupMobileMenu();
     setupTabs();
-    loadInstagramFeed();
     setupGalleryModal();
     loadVideoDetails();
     initHeroImage();
@@ -221,35 +220,6 @@ function setupTabs() {
     if (tabButtons.length > 0) {
         const firstTabId = tabButtons[0].getAttribute('data-tab');
         switchTab(firstTabId);
-    }
-}
-
-// Carregar feed do Instagram
-async function loadInstagramFeed() {
-    const instagramFeed = document.getElementById('instagramFeed');
-    
-    try {
-        const response = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${instagramConfig.accessToken}`);
-        const data = await response.json();
-        
-        if (data.data && data.data.length > 0) {
-            const latestPost = data.data[0];
-            const mediaUrl = latestPost.media_type === 'VIDEO' ? latestPost.thumbnail_url : latestPost.media_url;
-            
-            instagramFeed.innerHTML = `
-                <div class="instagram-post">
-                    <a href="${latestPost.permalink}" target="_blank">
-                        <img src="${mediaUrl}" alt="Última postagem do Instagram" loading="lazy">
-                        <div class="instagram-overlay">
-                            <p>${latestPost.caption || ''}</p>
-                        </div>
-                    </a>
-                </div>
-            `;
-        }
-    } catch (error) {
-        console.error('Erro ao carregar feed do Instagram:', error);
-        instagramFeed.innerHTML = '<p>Erro ao carregar a última postagem.</p>';
     }
 }
 
